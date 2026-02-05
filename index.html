@@ -2,49 +2,185 @@
 <html lang="sk">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slovenská légia</title>
     <style>
-        body { background-color: #8B0000; color: white; font-family: serif; text-align: center; padding-top: 100px; }
-        .lock-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #8B0000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        input { padding: 10px; font-size: 1.2rem; border: none; border-radius: 5px; }
-        button { padding: 10px 20px; margin-top: 10px; background: #D4AF37; border: none; cursor: pointer; font-weight: bold; }
-        #obsah { display: none; } /* Toto skryje tvoj web pred nepovolanými */
-        .pillar { border: 1px solid #D4AF37; margin: 10px; padding: 20px; display: inline-block; width: 250px; background: white; color: black; }
+        /* ZÁKLADNÉ NASTAVENIA */
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: #8B0000; /* Nitrianska červená */
+            color: white; 
+            font-family: 'Times New Roman', serif; 
+            height: 100vh; /* Celá výška obrazovky */
+            overflow: hidden; /* Aby sa nerobili zbytočné posuvníky */
+        }
+
+        /* OBRAZOVKA SO ZÁMKOM */
+        .lock-screen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #8B0000; 
+            z-index: 9999; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+        }
+        input { padding: 10px; font-size: 1.2rem; border: none; border-radius: 5px; margin-top: 10px; }
+        button { padding: 10px 20px; margin-top: 10px; background: #D4AF37; border: none; cursor: pointer; font-weight: bold; font-size: 1rem; }
+        button:hover { background: #b59230; }
+
+        /* HLAVNÉ ROZLOŽENIE STRÁNKY (Flexbox) */
+        #hlavny-web {
+            display: none; /* Na začiatku skryté */
+            display: flex; /* Toto rozdelí obrazovku na ľavú a pravú časť */
+            height: 100vh;
+        }
+
+        /* ĽAVÁ LIŠTA (MENU) */
+        .sidebar {
+            width: 250px; /* Pevná šírka menu */
+            background-color: #600000; /* O niečo tmavšia červená pre kontrast */
+            border-right: 3px solid #D4AF37; /* Zlatá čiara */
+            padding-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu-item {
+            color: #D4AF37;
+            text-decoration: none;
+            font-size: 1.5rem;
+            margin: 20px 0;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .menu-item:hover {
+            color: white;
+            border-bottom: 1px solid #D4AF37;
+        }
+
+        /* PRAVÁ STRANA (OBSAH) */
+        .content-area {
+            flex: 1; /* Zaberá zvyšok miesta */
+            padding: 50px;
+            overflow-y: auto; /* Ak je text dlhý, dá sa scrollovať */
+            text-align: center;
+        }
+
+        /* JEDNOTLIVÉ SEKCIE (Stránky) */
+        .sekcia {
+            display: none; /* Všetky sú skryté */
+            animation: fadeIn 0.5s; /* Efekt jemného objavenia */
+        }
+        
+        .sekcia.aktivna {
+            display: block; /* Len aktívna sa ukáže */
+        }
+
+        /* DIZAJN PRVKOV */
+        h1 { color: #D4AF37; font-size: 3rem; margin-bottom: 10px; }
+        h2 { color: #D4AF37; border-bottom: 1px solid #D4AF37; display: inline-block; padding-bottom: 10px; }
+        p { font-size: 1.2rem; line-height: 1.6; max-width: 800px; margin: 20px auto; }
+        .pillar { border: 1px solid #D4AF37; margin: 15px; padding: 20px; display: inline-block; width: 250px; background: rgba(255,255,255,0.1); vertical-align: top; }
+        .pillar h3 { color: #D4AF37; margin-top: 0; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ÚPRAVA PRE MOBILY (Aby menu nebolo obrovské) */
+        @media (max-width: 768px) {
+            #hlavny-web { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; flex-direction: row; justify-content: space-around; padding: 10px 0; border-right: none; border-bottom: 3px solid #D4AF37; }
+            .menu-item { font-size: 1rem; margin: 0; }
+        }
     </style>
 </head>
 <body>
 
     <div id="lock" class="lock-screen">
-        <h1>Vstup len pre členov Slovenskej légie</h1>
-        <p>Zadajte heslo pre zobrazenie konceptu:</p>
+        <h1>Slovenská légia</h1>
+        <p>Zadajte heslo pre vstup do pevnosti:</p>
         <input type="password" id="pass">
         <button onclick="skontroluj()">Vstúpiť</button>
     </div>
 
-    <div id="obsah">
-        <h1>Slovenská légia</h1>
-        <p><i>"Za krajšie Slovensko a rytierske srdce v každom z nás"</i></p>
-        <hr style="width: 50%; border-color: #D4AF37;">
-        
-        <div class="pillar"><h3>Múdrosť</h3><p>Hľadáme pravdu v záplave klamstiev.</p></div>
-        <div class="pillar"><h3>Láskavosť</h3><p>Sila bez srdca je tyrania.</p></div>
-        <div class="pillar"><h3>Odvaha</h3><p>Stáť si za pravdou, aj keď je to nepohodlné.</p></div>
-        <div class="pillar"><h3>Vytrvalosť</h3><p>Budovanie vlasti je beh na dlhú trať.</p></div>
-        <div class="pillar"><h3>Čestnosť</h3><p>Naše slovo je náš zákon.</p></div>
+    <div id="hlavny-web" style="display: none;"> <nav class="sidebar">
+            <div style="margin-bottom: 40px; font-weight: bold; color: white;">SL</div>
+            <a class="menu-item" onclick="prepnut('uvod')">Úvod</a>
+            <a class="menu-item" onclick="prepnut('onas')">O nás</a>
+            <a class="menu-item" onclick="prepnut('legendy')">Legendy</a>
+        </nav>
+
+        <main class="content-area">
+            
+            <div id="uvod" class="sekcia aktivna">
+                <h1>Slovenská légia</h1>
+                <p><i>"Za krajšie Slovensko a rytierske srdce v každom z nás"</i></p>
+                <hr style="width: 50%; border-color: #D4AF37; margin-bottom: 40px;">
+                
+                <div class="pillar"><h3>Múdrosť</h3><p>Hľadáme pravdu v záplave klamstiev.</p></div>
+                <div class="pillar"><h3>Láskavosť</h3><p>Sila bez srdca je tyrania.</p></div>
+                <div class="pillar"><h3>Odvaha</h3><p>Stáť si za pravdou, aj keď je to nepohodlné.</p></div>
+                <div class="pillar"><h3>Vytrvalosť</h3><p>Budovanie vlasti je beh na dlhú trať.</p></div>
+                <div class="pillar"><h3>Čestnosť</h3><p>Naše slovo je náš zákon.</p></div>
+            </div>
+
+            <div id="onas" class="sekcia">
+                <h1>O nás</h1>
+                <p>Slovenská légia vzniká ako odpoveď na potrebu návratu k hodnotám.</p>
+                <p>Nie sme politická strana, sme spoločenstvo ľudí, ktorí veria, že zmena začína od jednotlivca. Našou zbraňou nie je meč, ale charakter, vzdelanie a ochota pomáhať svojmu okoliu. Spájame tradíciu s moderným svetom.</p>
+            </div>
+
+            <div id="legendy" class="sekcia">
+                <h1>Legendy</h1>
+                <p>Naša história je plná velikánov, na ktorých sa zabúda.</p>
+                <div style="border: 2px solid #D4AF37; padding: 30px; margin-top: 30px; background: rgba(0,0,0,0.2);">
+                    <h2>Svätopluk</h2>
+                    <p style="font-size: 1.5rem; font-style: italic;">"Svätopluk bol mocné veľkoknieža a vytvoril obrovskú Slovanskú ríšu Veľkej Moravy."</p>
+                </div>
+            </div>
+
+        </main>
     </div>
 
     <script>
+        // FUNKCIA NA KONTROLU HESLA
         function skontroluj() {
             const zadane = document.getElementById("pass").value;
-            const tajneHeslo = "Nitra_2026"; // <--- SEM NAPÍŠ SVOJE HESLO
+            const tajneHeslo = "Nitra_2026"; 
 
             if (zadane === tajneHeslo) {
                 document.getElementById("lock").style.display = "none";
-                document.getElementById("obsah").style.display = "block";
+                // Zmeníme display na 'flex', aby sa zachovalo rozloženie vedľa seba
+                document.getElementById("hlavny-web").style.display = "flex"; 
             } else {
-                alert("Nesprávne heslo!");
+                alert("Nesprávne heslo! Skúste to znova.");
             }
         }
+
+        // FUNKCIA NA PREPÍNANIE STRÁNOK
+        function prepnut(nazovSekcie) {
+            // 1. Skryjeme všetky sekcie
+            var sekcie = document.getElementsByClassName("sekcia");
+            for (var i = 0; i < sekcie.length; i++) {
+                sekcie[i].classList.remove("aktivna");
+            }
+
+            // 2. Ukážeme tú, na ktorú sme klikli
+            document.getElementById(nazovSekcie).classList.add("aktivna");
+        }
+
+        // Umožní stlačiť Enter pri zadávaní hesla
+        document.getElementById("pass").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                skontroluj();
+            }
+        });
     </script>
 </body>
 </html>
