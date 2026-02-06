@@ -9,32 +9,31 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Times New Roman', serif; /* Historický font */
-            background-color: #f4f4f4; /* Pozadie pod obsahom */
-            color: #000;
+            font-family: 'Times New Roman', serif;
+            background-color: #8B0000; /* CELÉ POZADIE JE ČERVENÉ */
+            color: #FFFFFF; /* TEXT JE BIELY */
             display: flex;
-            height: 100vh; /* Roztiahnutie na celú výšku okna */
-            overflow: hidden; /* Skryje posuvník na hlavnom okne */
+            height: 100vh;
+            overflow: hidden;
         }
 
-        /* --- BOČNÉ MENU (SIDEBAR) --- */
+        /* --- BOČNÉ MENU (ĽAVÝ STĹPEC) --- */
         .sidebar {
             width: 280px;
-            background-color: #8B0000; /* Nitrianska červená */
-            color: #FFFFFF;
+            background-color: #600000; /* O niečo tmavšia červená pre menu, aby sa oddelilo */
+            border-right: 2px solid #D4AF37; /* Zlatá čiara */
             display: flex;
             flex-direction: column;
             padding: 30px 0;
-            box-shadow: 4px 0 10px rgba(0,0,0,0.3);
-            flex-shrink: 0; /* Menu sa nezmenší */
+            flex-shrink: 0;
             z-index: 100;
         }
 
         .logo {
             text-align: center;
             padding-bottom: 30px;
-            border-bottom: 2px solid #D4AF37; /* Zlatá čiara */
             margin-bottom: 20px;
+            border-bottom: 1px solid #D4AF37;
         }
 
         .logo h1 {
@@ -42,57 +41,62 @@
             font-size: 1.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #FFFFFF;
+            color: #D4AF37; /* Zlatý nadpis */
         }
 
         .logo span {
-            color: #D4AF37; /* Zlatá */
+            color: #FFFFFF;
             font-size: 0.9rem;
             font-style: italic;
         }
 
-        /* Odkazy v menu */
+        /* TLAČIDLÁ V MENU */
         .menu-btn {
             background: none;
             border: none;
             color: #FFFFFF;
             padding: 15px 30px;
             text-align: left;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-family: 'Times New Roman', serif;
             cursor: pointer;
             transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            width: 100%;
+            border-left: 5px solid transparent; /* Pripravené na efekt */
         }
 
-        .menu-btn:hover, .menu-btn.active {
-            background-color: #580000; /* Tmavšia červená pri nabehnutí */
-            border-left: 5px solid #D4AF37; /* Zlatý prúžok vľavo */
-            padding-left: 25px; /* Posun textu */
+        .menu-btn:hover {
+            background-color: #8B0000;
         }
 
-        /* --- HLAVNÝ OBSAH --- */
+        /* Keď je tlačidlo aktívne (kliknuté) */
+        .menu-btn.active {
+            background-color: #D4AF37; /* Zlaté pozadie */
+            color: #600000; /* Červené písmo */
+            border-left: 5px solid #FFFFFF; /* Biela čiara */
+            font-weight: bold;
+        }
+
+        /* --- HLAVNÝ OBSAH (PRAVÝ STĹPEC) --- */
         .content-area {
             flex-grow: 1;
             padding: 50px 80px;
-            overflow-y: auto; /* Posúvanie len v texte, nie v menu */
-            background-color: #FFFFFF; /* Čistá biela pre text */
-            background-image: linear-gradient(#f8f8f8 1px, transparent 1px); /* Jemné riadkovanie pre efekt papiera */
-            background-size: 100% 30px;
+            overflow-y: auto; /* Posúvanie textu */
+            background-color: #8B0000; /* Červené pozadie obsahu */
         }
 
-        /* Skrytie všetkých sekcií okrem aktívnej */
+        /* Skrytie sekcií */
         .page-section {
-            display: none;
-            animation: fadeIn 0.5s;
+            display: none; /* Všetko je skryté */
             max-width: 900px;
             margin: 0 auto;
+            border-left: 1px solid rgba(212, 175, 55, 0.3); /* Jemná zlatá čiara vľavo od textu */
+            padding-left: 30px;
         }
 
+        /* Zobrazenie aktívnej sekcie */
         .page-section.active {
-            display: block;
+            display: block; /* Len aktívna sa zobrazí */
+            animation: fadeIn 0.5s;
         }
 
         @keyframes fadeIn {
@@ -102,40 +106,38 @@
 
         /* --- ŠTÝLY TEXTU --- */
         h2 {
-            color: #8B0000;
-            font-size: 2.5rem;
+            color: #D4AF37; /* Zlaté nadpisy */
+            font-size: 2.8rem;
             border-bottom: 2px solid #D4AF37;
             padding-bottom: 10px;
             margin-top: 0;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            color: #D4AF37;
+            font-size: 1.8rem;
+            margin-top: 40px;
         }
 
         p, li {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             line-height: 1.8;
-            color: #333;
+            color: #f0f0f0; /* Jemne sivobiela pre lepšiu čitateľnosť na červenej */
             margin-bottom: 20px;
+            text-align: justify;
         }
 
-        /* Citáty */
+        /* CITÁTY */
         .quote {
-            background-color: #f9f9f9;
-            border-left: 5px solid #8B0000;
-            padding: 20px 30px;
+            background-color: #600000; /* Tmavší červený box */
+            border: 1px solid #D4AF37; /* Zlatý rám */
+            padding: 25px;
             margin: 30px 0;
             font-style: italic;
+            color: #D4AF37; /* Zlatý text citátu */
             font-size: 1.3rem;
-            color: #555;
-            position: relative;
-        }
-        
-        .quote::before {
-            content: "„";
-            font-size: 4rem;
-            color: #D4AF37;
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            opacity: 0.5;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
         }
 
         .quote-author {
@@ -143,11 +145,12 @@
             margin-top: 10px;
             font-size: 1rem;
             font-weight: bold;
-            color: #8B0000;
+            color: #FFFFFF;
             text-align: right;
+            font-style: normal;
         }
 
-        /* Kartičky pre cnosti */
+        /* KARTIČKY CNOSTÍ */
         .pillars-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -156,35 +159,45 @@
         }
 
         .pillar-card {
-            border: 1px solid #ddd;
+            border: 1px solid #D4AF37;
+            background-color: #600000;
             padding: 20px;
-            background: #fff;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .pillar-card:hover {
+            background-color: #500000;
+            transform: translateY(-5px);
         }
 
         .pillar-card h3 {
-            color: #8B0000;
             margin-top: 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+            padding-bottom: 10px;
         }
 
-        /* Zoznam v Programe */
+        /* ZOZNAM PROGRAMU */
         ul.program-list {
-            list-style-type: none; /* Odstránime klasické bodky */
-            padding-left: 0;
+            list-style: none;
+            padding: 0;
         }
-
         ul.program-list li {
             position: relative;
             padding-left: 30px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
         }
-
         ul.program-list li::before {
-            content: "✦"; /* Znak namiesto bodky */
+            content: "⚔"; /* Meč ako odrážka */
             color: #D4AF37;
             position: absolute;
             left: 0;
-            top: 2px;
+            font-size: 1.2rem;
+        }
+
+        strong {
+            color: #D4AF37;
         }
 
     </style>
@@ -197,14 +210,14 @@
             <span>Česť a Jednota</span>
         </div>
         
-        <button class="menu-btn active" onclick="showPage('uvod', this)">Úvod</button>
-        <button class="menu-btn" onclick="showPage('onas', this)">O nás</button>
-        <button class="menu-btn" onclick="showPage('program', this)">Program</button>
-        <button class="menu-btn" onclick="showPage('cnosti', this)">5 Cností</button>
-        <button class="menu-btn" onclick="showPage('legendy', this)">Legendy</button>
-        <button class="menu-btn" onclick="showPage('poezia', this)">Poézia</button>
-        <button class="menu-btn" onclick="showPage('pridajsa', this)">Pridaj sa k nám</button>
-        <button class="menu-btn" onclick="showPage('kontakt', this)">Kontakt</button>
+        <button class="menu-btn active" onclick="showSection('uvod', this)">Úvod</button>
+        <button class="menu-btn" onclick="showSection('onas', this)">O nás</button>
+        <button class="menu-btn" onclick="showSection('program', this)">Program</button>
+        <button class="menu-btn" onclick="showSection('cnosti', this)">5 Cností</button>
+        <button class="menu-btn" onclick="showSection('legendy', this)">Legendy</button>
+        <button class="menu-btn" onclick="showSection('poezia', this)">Poézia</button>
+        <button class="menu-btn" onclick="showSection('pridajsa', this)">Pridaj sa k nám</button>
+        <button class="menu-btn" onclick="showSection('kontakt', this)">Kontakt</button>
     </div>
 
     <div class="content-area">
@@ -213,10 +226,6 @@
             <h2>Vitajte v Slovenskej légii</h2>
             <p>Sme zatiaľ len malý klub z okolia Banskej Bystrice, no naše ambície siahajú do celej našej krásnej krajiny.</p>
             <p>Slovenská republika je naším domovom, ktorý máme hlboko v srdci, avšak vnímame úpadok, v ktorom sa naša krajina nachádza. My osobne veríme, že nemôžeme čakať, až nás „spasia“ volení predstavitelia nášho štátu a veríme, že zmena musí prísť od nás, občanov Slovenskej republiky.</p>
-            <div class="quote">
-                „Nech je každý z nás lepší dnes, ako bol včera a naša vlasť bude veľká a krásna.“
-                <span class="quote-author">– Milan Rastislav Štefánik</span>
-            </div>
         </div>
 
         <div id="onas" class="page-section">
@@ -225,4 +234,123 @@
             <p>Demokracia má svoje silné stránky, avšak práve v posledných rokoch sa ukazuje, že má aj silné slabiny a najväčšou z nich je rozdeľovanie spoločnosti na zvyčajne dva protichodné tábory. Keďže nechceme, aby sa Slovensko dostalo do stavu, kedy v demokraciu už nebude veriť nikto z občanov, tak chceme práve tento problém vyriešiť my.</p>
             
             <h3>Ako vznikla myšlienka?</h3>
-            <p>Celá
+            <p>Celá myšlienka vznikla z výroku jedného veľkého vlastenca Milana Rastislava Štefánika. Tento citát spolu s našou vierou, že svet, alebo aspoň naša krajina sa môže zmeniť, ale len ak bude na tom pracovať každý jeden z nás.</p>
+            
+            <div class="quote">
+                „Nech je každý z nás lepší dnes, ako bol včera a naša vlasť bude veľká a krásna.“
+                <span class="quote-author">– Milan Rastislav Štefánik</span>
+            </div>
+
+            <p>My osobne sme mladí ľudia plní viery a optimizmu a to aj napriek tomu, že vnímame stav, v akom sa náš štát nachádza od jeho samostatnosti v roku 1993. Niekto by mohol namietať, že si kladieme za cieľ nerealistický, príliš zahmlený cieľ rojkov, no ja si dovolím na to odpovedať:</p>
+            
+            <div class="quote">
+                „Neviem, kto môže zmeniť Slovensko a svet k lepšiemu, ale viem, kto to určite nemôže. Ten, čo neverí, že je niečo také možné.“
+            </div>
+
+            <div class="quote">
+                „Vlastenectví je láska k vlastnímu národu, nikoli nenávist k jiným.“
+                <span class="quote-author">– Tomáš Garrigue Masaryk</span>
+            </div>
+        </div>
+
+        <div id="program" class="page-section">
+            <h2>Náš Program</h2>
+            <p>Momentálne sa len rozbiehame a uvedomujeme si, že to celé stojí len na jednej nohe, no už teraz máme nasledujúce zamerania:</p>
+            
+            <ul class="program-list">
+                <li>Spájať ľudí s rovnakým názorom ako my o dôležitosti jednoty aj napriek rôznym politickým názorom.</li>
+                <li>Písať rôzne príspevky a zbierať eseje a básne od ostatných občanov SR a tým budovať a rozvíjať našu kultúru a naše myslenie.</li>
+                <li>Propagovať klub na sociálnych sieťach a šíriť dôležité myšlienky, či naprávať niektoré mýty, ktorým väčšina Slovákov stále verí.</li>
+                <li>Podporovať myšlienky slobody jednotlivca, ale aj silu jednoty, podporovať vieru v demokraciu a vládne inštitúcie Slovenskej republiky.</li>
+            </ul>
+        </div>
+
+        <div id="cnosti" class="page-section">
+            <h2>5 Rytierskych Cností</h2>
+            <p>Každý legionár musí pracovať na tom, aby dosiahol týchto 5 cností:</p>
+            
+            <div class="pillars-grid">
+                <div class="pillar-card">
+                    <h3>1. Múdrosť</h3>
+                    <p>Najväčšou zbraňou akú máme je pravda, tú musíme chrániť a túžiť po jej poznaní.</p>
+                </div>
+                <div class="pillar-card">
+                    <h3>2. Láskavosť</h3>
+                    <p>Aj keď je to niekedy ťažké, musíme byť k sebe milí a rešpektovať to, že druhí ľudia môžu vnímať svet inak ako my.</p>
+                </div>
+                <div class="pillar-card">
+                    <h3>3. Odvaha</h3>
+                    <p>Musíme byť ochotní čeliť aj nepríjemným situáciám, aby sme dosiahli naše ciele.</p>
+                </div>
+                <div class="pillar-card">
+                    <h3>4. Vytrvalosť</h3>
+                    <p>Zmena nepríde cez noc. Musíme byť verní myšlienkam, ktoré presadzujeme, aj keď to nie vždy bude „efektívne“.</p>
+                </div>
+                <div class="pillar-card">
+                    <h3>5. Čestnosť</h3>
+                    <p>Musíme si chrániť česť a v prípade, že urobíme chybu, priznáme si ju a napravíme sa.</p>
+                </div>
+            </div>
+
+            <div class="quote">
+                „Musíme byť tvrdí hlavne sami na seba a milosrdní k druhým.“
+            </div>
+        </div>
+
+        <div id="legendy" class="page-section">
+            <h2>Legendy a Príbehy</h2>
+            <p><em>Tu sa budú čoskoro objavovať príbehy o rytieroch Nitrianskeho kniežatstva a moderné legendy, ktoré nás inšpirujú.</em></p>
+            <div class="quote">Stránka je momentálne v príprave.</div>
+        </div>
+
+        <div id="poezia" class="page-section">
+            <h2>Poézia</h2>
+            <p><em>Priestor pre verše, ktoré budujú ducha a lásku k vlasti.</em></p>
+            <div class="quote">Stránka je momentálne v príprave.</div>
+        </div>
+
+        <div id="pridajsa" class="page-section">
+            <h2>Pridaj sa k nám</h2>
+            <p>Ak ťa naše hodnoty oslovili, staň sa súčasťou zmeny. Zanechaj nám svoj kontakt a my ťa budeme informovať o našich krokoch.</p>
+            <p style="border: 1px dashed #D4AF37; padding: 20px; text-align: center; color: #D4AF37;">[Miesto pre registračný formulár]</p>
+        </div>
+
+        <div id="kontakt" class="page-section">
+            <h2>Kontaktujte nás</h2>
+            <p>Máte otázky alebo nápady? Napíšte nám.</p>
+            <p>Email: <strong>kontakt@slovenskalegia.sk</strong> (príklad)</p>
+            <p style="border: 1px dashed #D4AF37; padding: 20px; text-align: center; color: #D4AF37;">[Miesto pre kontaktný formulár]</p>
+        </div>
+
+    </div>
+
+    <script>
+        function showSection(sectionId, btnElement) {
+            // 1. Skryjeme všetky sekcie
+            var sections = document.querySelectorAll('.page-section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+                section.classList.remove('active');
+            });
+
+            // 2. Zobrazíme vybranú sekciu
+            var target = document.getElementById(sectionId);
+            if (target) {
+                target.style.display = 'block';
+                // Krátke oneskorenie pre animáciu
+                setTimeout(function() {
+                    target.classList.add('active');
+                }, 10);
+            }
+
+            // 3. Upravíme tlačidlá v menu (aby svietilo to správne)
+            var buttons = document.querySelectorAll('.menu-btn');
+            buttons.forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            btnElement.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
