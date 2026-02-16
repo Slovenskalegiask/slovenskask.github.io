@@ -14,19 +14,20 @@
             color: #FFFFFF; /* TEXT JE BIELY */
             display: flex;
             height: 100vh;
-            overflow: hidden;
+            overflow: hidden; /* Na PC sa posúva len pravá časť */
         }
 
         /* --- BOČNÉ MENU (ĽAVÝ STĹPEC) --- */
         .sidebar {
             width: 280px;
-            background-color: #600000; /* O niečo tmavšia červená pre menu, aby sa oddelilo */
+            background-color: #600000; /* O niečo tmavšia červená pre menu */
             border-right: 2px solid #D4AF37; /* Zlatá čiara */
             display: flex;
             flex-direction: column;
             padding: 30px 0;
             flex-shrink: 0;
             z-index: 100;
+            overflow-y: auto; /* Aby sa dalo scrollovať v menu ak je malé okno */
         }
 
         .logo {
@@ -61,18 +62,17 @@
             font-family: 'Times New Roman', serif;
             cursor: pointer;
             transition: 0.3s;
-            border-left: 5px solid transparent; /* Pripravené na efekt */
+            border-left: 5px solid transparent;
         }
 
         .menu-btn:hover {
             background-color: #8B0000;
         }
 
-        /* Keď je tlačidlo aktívne (kliknuté) */
         .menu-btn.active {
-            background-color: #D4AF37; /* Zlaté pozadie */
-            color: #600000; /* Červené písmo */
-            border-left: 5px solid #FFFFFF; /* Biela čiara */
+            background-color: #D4AF37;
+            color: #600000;
+            border-left: 5px solid #FFFFFF;
             font-weight: bold;
         }
 
@@ -81,21 +81,20 @@
             flex-grow: 1;
             padding: 50px 80px;
             overflow-y: auto; /* Posúvanie textu */
-            background-color: #8B0000; /* Červené pozadie obsahu */
+            background-color: #8B0000;
         }
 
         /* Skrytie sekcií */
         .page-section {
-            display: none; /* Všetko je skryté */
+            display: none;
             max-width: 900px;
             margin: 0 auto;
-            border-left: 1px solid rgba(212, 175, 55, 0.3); /* Jemná zlatá čiara vľavo od textu */
+            border-left: 1px solid rgba(212, 175, 55, 0.3);
             padding-left: 30px;
         }
 
-        /* Zobrazenie aktívnej sekcie */
         .page-section.active {
-            display: block; /* Len aktívna sa zobrazí */
+            display: block;
             animation: fadeIn 0.5s;
         }
 
@@ -106,7 +105,7 @@
 
         /* --- ŠTÝLY TEXTU --- */
         h2 {
-            color: #D4AF37; /* Zlaté nadpisy */
+            color: #D4AF37;
             font-size: 2.8rem;
             border-bottom: 2px solid #D4AF37;
             padding-bottom: 10px;
@@ -123,19 +122,19 @@
         p, li {
             font-size: 1.25rem;
             line-height: 1.8;
-            color: #f0f0f0; /* Jemne sivobiela pre lepšiu čitateľnosť na červenej */
+            color: #f0f0f0;
             margin-bottom: 20px;
             text-align: justify;
         }
 
         /* CITÁTY */
         .quote {
-            background-color: #600000; /* Tmavší červený box */
-            border: 1px solid #D4AF37; /* Zlatý rám */
+            background-color: #600000;
+            border: 1px solid #D4AF37;
             padding: 25px;
             margin: 30px 0;
             font-style: italic;
-            color: #D4AF37; /* Zlatý text citátu */
+            color: #D4AF37;
             font-size: 1.3rem;
             box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
         }
@@ -189,7 +188,7 @@
             padding-bottom: 10px;
         }
         ul.program-list li::before {
-            content: "⚔"; /* Meč ako odrážka */
+            content: "⚔";
             color: #D4AF37;
             position: absolute;
             left: 0;
@@ -198,6 +197,57 @@
 
         strong {
             color: #D4AF37;
+        }
+
+        /* --- MOBILNÁ VERZIA (TOTO JE NOVÉ) --- */
+        @media screen and (max-width: 768px) {
+            body {
+                flex-direction: column; /* Menu hore, obsah dole */
+                height: auto; /* Povoliť scrollovanie celej stránky */
+                overflow: auto;
+            }
+
+            .sidebar {
+                width: 100%; /* Menu cez celú šírku */
+                height: auto;
+                border-right: none;
+                border-bottom: 3px solid #D4AF37;
+                padding: 10px 0;
+            }
+
+            .logo h1 {
+                font-size: 1.5rem; /* Menšie logo na mobile */
+            }
+
+            .menu-btn {
+                padding: 10px 20px; /* Menšie tlačidlá */
+                text-align: center; /* Text na stred */
+                border-left: none; /* Zrušiť bočnú čiaru */
+                border-bottom: 2px solid transparent; /* Dať čiaru naspodok */
+                font-size: 1rem;
+            }
+            
+            .menu-btn:hover {
+                 background-color: #500000;
+            }
+
+            .menu-btn.active {
+                border-left: none;
+                border-bottom: 2px solid #FFFFFF; /* Aktívne tlačidlo podčiarknuté */
+            }
+
+            .content-area {
+                padding: 30px 20px; /* Menšie okraje pre text */
+            }
+
+            .page-section {
+                border-left: none; /* Zrušiť zlatú čiaru vedľa textu */
+                padding-left: 0;
+            }
+
+            h2 {
+                font-size: 2rem; /* Menšie nadpisy */
+            }
         }
 
     </style>
@@ -231,8 +281,16 @@
                 <span class="quote-author">– Milan Rastislav Štefánik</span>
             </div>
 
-            <div style="text-align: center; margin-top: 50px;">
-                <img src="logo.png" alt="Logo Slovenskej légie" style="max-width: 200px; height: auto;">
+            <div style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
+                <img src="logo.png" alt="Logo Slovenskej légie" style="
+                    width: 220px; 
+                    height: 220px; 
+                    object-fit: cover; 
+                    border-radius: 50%; 
+                    border: 3px solid #D4AF37; 
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
+                    background-color: #fff;
+                ">
             </div>
         </div>
 
